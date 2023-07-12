@@ -1,0 +1,45 @@
+esphome:
+  name: irbarrier01
+  friendly_name: IRbarrier01
+  includes:
+    - irbarrier01/
+  libraries:
+
+esp8266:
+  board: esp01_1m
+
+# Enable logging
+logger:
+  baud_rate: 0
+
+# Enable Home Assistant API
+api:
+  encryption:
+    key: "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+
+ota:
+  password: "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+
+wifi:
+  ssid: !secret wifi_ssid
+  password: !secret wifi_password
+  domain: .local
+  fast_connect: True
+
+  # Enable fallback hotspot (captive portal) in case wifi connection fails
+  ap:
+    ssid: "Irbarrier01 Fallback Hotspot"
+    password: "sdlkfjqhelkvrnlk"
+
+captive_portal:
+
+
+binary_sensor:
+  - platform: custom
+    lambda: |-
+      auto irbarrier = new MyIRBarrier();
+      App.register_component(irbarrier);
+      return {irbarrier};
+
+    binary_sensors:
+      name: "IR Barrier"
