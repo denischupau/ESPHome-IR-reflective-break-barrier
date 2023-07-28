@@ -2,9 +2,9 @@
 
 ## The problem
 
-Some of the neighbours' dogs, when I'm not at home, are coming to relieve themselves on my lawn and driveway, it stinks, and I have my feet or wheels regularly full of it. But... nobody wants to take responsibility.
+Some of the neighbours' dogs, when I'was not at home, were coming to relieve themselves on my lawn and driveway, it stinked, and I had my feet or wheels regularly full of it. But... nobody wanted to take responsibility.
 
-So I had to take action, and present them with proofs, and as I like to code and build eletronic things: let's DIY!
+So I had to take action, and confront them with proofs, and as I like to code and build eletronic things: let's DIY!
 
 ## The idea I came up with
 
@@ -90,6 +90,9 @@ Other solutions I considered, and may consider in the future:
 * use a small microcontroller with hoardware PWM (i.e. ATTiny85) connected to the ESP01, to generate the 38kHz carrier with the arduino function "tone(38000);" and its modulation, and also make the detection of the breach and generate an event (pin transition to simulate a button press/release, serial message) so ESPhome only has to report on this event when it can, no time-sensitive task.
 * as in a few of the resources: 2 NE555 to generate the 38kHz (38,461Hz) carrier and its modulation, and also the detection, old school, but efficient and reliable!
 
+Imrovements:
+* make the I2S DMA pattern generate the "blinks" also by inserting 0s in the 38kHz pattern
+
 ## Resources and inspiration
 
 Thanks to them all for their good work:
@@ -106,7 +109,7 @@ Thanks to them all for their good work:
 Put the 3 files (irbarrier.h, and the 2 i2sTXcircular.* in an "irbarrier01" folder) in your ESPHome config folder (usually where your YAML file is).
 
 In the YAML file for this ESPHome ESP01 1MB device, add:
-'''
+```YAML
 esphome:
   name: irbarrier01
   friendly_name: IRbarrier01
@@ -122,4 +125,5 @@ binary_sensor:
 
     binary_sensors:
       name: "IR Barrier"
-'''
+```
+
