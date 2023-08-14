@@ -76,6 +76,13 @@ The ESP8266 pins for I2S are
 * Data bit-clock (SCK) = GPIO15  (NOT directly accessible on the ESP-01's)
 * Word select (WS) = GPIO2/TX1   (directly accessible, though not used here)
 
+The connections
+* GPIO3 (RX0) is connected to the base of the transistor via a resistor on the emitter board,
+* GPIO0 is connected to the IR recptor via a resistor on the receptor board.
+* GPIO0 and GPIO3 are connected to their respective bord (emitter board & receptor board) through a 4-wire cable (GND, 5v, GPIO0, GPIO3) where the emitter/receptor are outside the house,
+* 5V from an old USB phone charger is applied on the VCC connector,
+* the other connector (programming serial port) can be used with GPIO0 connected to ground (flashing mode) before resetting, then flash the firmware.
+
 In the source code:
 * The blinking that works well in my tests is BLINK_OFF at 2xBLINK_ON, with BLINK_ON_MILLIS around 6 to 20ms.
 * For some other values of "blinking" it works well for a while (15-30min) then the sensor begins to ignore the IR carrier signals, and the beam appears as always broken.
